@@ -1,16 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface Item {
-  id: number;
-  nome: string;
-  descricao: string;
-}
-
-const ELEMENT_DATA: Item[] = [
-  { id: 1, nome: 'Item 1', descricao: 'Descrição 1' },
-  { id: 2, nome: 'Item 2', descricao: 'Descrição 2' },
-  { id: 3, nome: 'Item 3', descricao: 'Descrição 3' }
-];
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listagem',
@@ -18,11 +7,18 @@ const ELEMENT_DATA: Item[] = [
   standalone: false,
   styleUrls: ['./listagem.component.css']
 })
-export class ListagemComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'descricao'];
-  dataSource = ELEMENT_DATA;
+export class ListagemComponent {
+  itens: any[] = [
+    { nome: 'Item 1', categoria: 'Categoria A' },
+    { nome: 'Item 2', categoria: 'Categoria B' }
+  ];
 
-  constructor() { }
-
-  ngOnInit(): void { }
+  constructor(private route: ActivatedRoute) {
+    // Verifica se há novos dados passados pela rota e adiciona à lista
+    this.route.queryParams.subscribe(params => {
+      if (params['nome'] && params['categoria']) {
+        this.itens.push({ nome: params['nome'], categoria: params['categoria'] });
+      }
+    });
+  }
 }

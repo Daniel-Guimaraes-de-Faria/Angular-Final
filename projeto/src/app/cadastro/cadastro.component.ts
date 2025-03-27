@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,40 +7,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: false,
   styleUrls: ['./cadastro.component.css']
 })
-export class CadastroComponent implements OnInit {
-  cadastroForm: FormGroup;
+export class CadastroComponent {
+  nome: string = '';
+  categoria: string = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private snackBar: MatSnackBar
-  ) {
-    this.cadastroForm = this.fb.group({
-      nome: ['', Validators.required],
-      categoria: ['', Validators.required],
-      ativo: [false],
-      tipo: ['', Validators.required]
-    });
-  }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void { }
-
-  onSalvar(): void {
-    if (this.cadastroForm.valid) {
-      console.log('Dados do formulário:', this.cadastroForm.value);
-      this.snackBar.open('Cadastro salvo com sucesso!', 'Fechar', {
-        duration: 3000
-      });
-      // Opcional: Navegar para a tela de listagem após salvar
-      // this.router.navigate(['/listagem']);
-    } else {
-      this.snackBar.open('Preencha os campos obrigatórios!', 'Fechar', {
-        duration: 3000
+  salvar() {
+    if (this.nome && this.categoria) {
+      // Redireciona para listagem e passa os dados pela rota
+      this.router.navigate(['/listagem'], {
+        queryParams: { nome: this.nome, categoria: this.categoria }
       });
     }
   }
 
-  onCancelar(): void {
+  cancelar() {
     this.router.navigate(['/listagem']);
   }
 }
