@@ -13,6 +13,19 @@
                 <mat-label>Categoria</mat-label>
                 <input matInput [(ngModel)]="categoria">
             </mat-form-field>
+
+            <mat-checkbox formControlName="ativo">Ativo</mat-checkbox>
+
+            <div class="radio-group">
+                <label>Tipo:</label>
+                <mat-radio-group formControlName="tipo">
+                    <mat-radio-button value="opcao1">Opção 1</mat-radio-button>
+                    <mat-radio-button value="opcao2">Opção 2</mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="cadastroForm.get('tipo')?.hasError('required')">
+                    Selecione um tipo
+                </mat-error>
+            </div>
             <div class="button-group">
                 <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
                 <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
