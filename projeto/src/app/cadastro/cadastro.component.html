@@ -1,18 +1,22 @@
-<h2>Cadastro de Item</h2>
+<mat-toolbar color="primary">
+    <span>Cadastro de Item</span>
+</mat-toolbar>
+<div class="container">
+    <mat-card>
+        <mat-card-content>
+            <mat-form-field class="full-width">
+                <mat-label>Nome</mat-label>
+                <input matInput [(ngModel)]="nome">
+            </mat-form-field>
 
-<mat-card>
-    <mat-card-content>
-        <mat-form-field>
-            <mat-label>Nome</mat-label>
-            <input matInput [(ngModel)]="nome">
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Categoria</mat-label>
-            <input matInput [(ngModel)]="categoria">
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
-        <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
-    </mat-card-content>
-</mat-card>
+            <mat-form-field class="full-width">
+                <mat-label>Categoria</mat-label>
+                <input matInput [(ngModel)]="categoria">
+            </mat-form-field>
+            <div class="button-group">
+                <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
+                <button mat-raised-button color="warn" (click)="cancelar()">Cancelar</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
